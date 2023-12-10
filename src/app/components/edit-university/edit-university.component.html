@@ -1,0 +1,123 @@
+<div class="container" *ngIf="currentUser.isAdmin; else notAdmin">
+  <div class="col-md-12">
+    <div>
+      <h1 class="text-center display-3 p-3" *ngFor="let university of university_list">Editing
+        {{university.institution}}</h1>
+      <div class="card card-container col-md-6 mx-auto">
+        <form *ngIf="!isSuccessful" name="form" (ngSubmit)="f.form.valid && onSubmit()" #f="ngForm" novalidate>
+          <div class="form-group">
+            <label for="r2022">2022 Rank</label>
+            <input type="r2022" class="form-control" name="r2022" [(ngModel)]="form.r2022" required r2022
+              #r2022="ngModel" [ngClass]="{ 'is-invalid': f.submitted && r2022.errors }" />
+            <div class="invalid-feedback" *ngIf="r2022.errors && f.submitted">
+              <div *ngIf="r2022.errors['required']">2022 Rank is required</div>
+            </div>
+          </div>
+          <div class="form-group">
+            <label for="r2021">2021 Rank</label>
+            <input type="r2021" class="form-control" name="r2021" [(ngModel)]="form.r2021" required r2021
+              #r2021="ngModel" [ngClass]="{ 'is-invalid': f.submitted && r2021.errors }" />
+            <div class="invalid-feedback" *ngIf="r2021.errors && f.submitted">
+              <div *ngIf="r2021.errors['required']">2022 Rank is required</div>
+            </div>
+          </div>
+          <div class="form-group">
+            <label for="score">Score</label>
+            <input type="score" class="form-control" name="score" [(ngModel)]="form.score" required score
+              #score="ngModel" [ngClass]="{ 'is-invalid': f.submitted && score.errors }" />
+            <div class="invalid-feedback" *ngIf="score.errors && f.submitted">
+              <div *ngIf="score.errors['required']">Score is required</div>
+            </div>
+          </div>
+          <div class="form-group">
+            <label for="course">Course</label>
+            <input type="course" class="form-control" name="course" [(ngModel)]="form.course" required course
+              #course="ngModel" [ngClass]="{ 'is-invalid': f.submitted && course.errors }" />
+            <div class="invalid-feedback" *ngIf="course.errors && f.submitted">
+              <div *ngIf="course.errors['required']">Course is required</div>
+            </div>
+          </div>
+          <div class="form-group">
+            <label for="teaching">Teaching</label>
+            <input type="teaching" class="form-control" name="teaching" [(ngModel)]="form.teaching" required teaching
+              #teaching="ngModel" [ngClass]="{ 'is-invalid': f.submitted && teaching.errors }" />
+            <div class="invalid-feedback" *ngIf="teaching.errors && f.submitted">
+              <div *ngIf="teaching.errors['required']">Teaching is required</div>
+            </div>
+          </div>
+          <div class="form-group">
+            <label for="feedback">Feedback</label>
+            <input type="feedback" class="form-control" name="feedback" [(ngModel)]="form.feedback" required feedback
+              #feedback="ngModel" [ngClass]="{ 'is-invalid': f.submitted && feedback.errors }" />
+            <div class="invalid-feedback" *ngIf="feedback.errors && f.submitted">
+              <div *ngIf="feedback.errors['required']">Feedback is required</div>
+            </div>
+          </div>
+          <div class="form-group">
+            <label for="ratio">Ratio</label>
+            <input type="ratio" class="form-control" name="ratio" [(ngModel)]="form.ratio" required ratio
+              #ratio="ngModel" [ngClass]="{ 'is-invalid': f.submitted && ratio.errors }" />
+            <div class="invalid-feedback" *ngIf="ratio.errors && f.submitted">
+              <div *ngIf="ratio.errors['required']">Ratio is required</div>
+            </div>
+          </div>
+          <div class="form-group">
+            <label for="spend">Spend</label>
+            <input type="spend" class="form-control" name="spend" [(ngModel)]="form.spend" required spend
+              #spend="ngModel" [ngClass]="{ 'is-invalid': f.submitted && spend.errors }" />
+            <div class="invalid-feedback" *ngIf="spend.errors && f.submitted">
+              <div *ngIf="spend.errors['required']">Spend is required</div>
+            </div>
+          </div>
+          <div class="form-group">
+            <label for="tariff">Tariff</label>
+            <input type="tariff" class="form-control" name="tariff" [(ngModel)]="form.tariff" required tariff
+              #tariff="ngModel" [ngClass]="{ 'is-invalid': f.submitted && tariff.errors }" />
+            <div class="invalid-feedback" *ngIf="tariff.errors && f.submitted">
+              <div *ngIf="tariff.errors['required']">Tariff is required</div>
+            </div>
+          </div>
+          <div class="form-group">
+            <label for="career">Career</label>
+            <input type="career" class="form-control" name="career" [(ngModel)]="form.career" required career
+              #career="ngModel" [ngClass]="{ 'is-invalid': f.submitted && career.errors }" />
+            <div class="invalid-feedback" *ngIf="career.errors && f.submitted">
+              <div *ngIf="career.errors['required']">Career is required</div>
+            </div>
+          </div>
+          <div class="form-group">
+            <label for="continuation">Continuation</label>
+            <input type="continuation" class="form-control" name="continuation" [(ngModel)]="form.continuation" required
+              continuation #continuation="ngModel" [ngClass]="{ 'is-invalid': f.submitted && continuation.errors }" />
+            <div class="invalid-feedback" *ngIf="continuation.errors && f.submitted">
+              <div *ngIf="continuation.errors['required']">Continuation is required</div>
+            </div>
+          </div>
+          <div class="form-group">
+            <label for="institution">Institution</label>
+            <input type="institution" class="form-control" name="institution" [(ngModel)]="form.institution" required
+              institution #institution="ngModel" [ngClass]="{ 'is-invalid': f.submitted && institution.errors }" />
+            <div class="invalid-feedback" *ngIf="institution.errors && f.submitted">
+              <div *ngIf="institution.errors['required']">Institution is required</div>
+            </div>
+          </div>
+
+          <div class="form-group">
+            <button class="btn btn-primary btn-primary">Create</button>
+          </div>
+
+          <div class="alert alert-warning" *ngIf="f.submitted && isFailure">
+            University creation failed!<br />{{ errorMessage }}
+          </div>
+        </form>
+
+        <div class="alert alert-success" *ngIf="isSuccessful">
+          New University Added!
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+<ng-template #notAdmin>
+  You must be an admin to access this page.
+</ng-template>

@@ -1,0 +1,195 @@
+<div *ngFor="let university of university_list | async">
+  <div class="jumbotron myjumbotron">
+    <div class="container-fluid bg-3 text-center">
+      <h1>{{university.institution}}</h1>
+      <div class="row justify-content-center lead">
+        <div class="col-sm-1">
+          <p class="font-weight-bold">2022 Rank:</p>
+          <p>{{university.r2022}}</p>
+        </div>
+        <div class="col-sm-1">
+          <p class="font-weight-bold">2021 Rank:</p>
+          <p>{{university.r2021}}</p>
+        </div>
+      </div>
+      <ng-container *ngIf="currentUser && !isBookmarked;">
+        <button type="button" class="btn btn-success" (click)="addBookmark(university.institution)">Bookmark</button>
+      </ng-container>
+      <ng-container *ngIf="currentUser && isBookmarked;">
+        <button type="button" class="btn btn-danger" (click)="removeBookmark()">Remove
+          Bookmark</button>
+      </ng-container>
+    </div>
+  </div>
+
+  <div class="container-fluid bg-3 text-center">
+    <h3>Statistics for {{university.institution}}</h3><br>
+    <div class="row justify-content-center lead">
+      <div class="col-sm-3">
+        <p class="font-weight-bold">Score</p>
+        <p>Overall score for university:</p>
+        <p class="mb-1">{{university.score}}</p>
+      </div>
+      <div class="col-sm-3">
+        <p class="font-weight-bold">Course</p>
+        <p>Percentage of students satisfied with their course:</p>
+        <p class="mb-1">{{university.course}}%</p>
+      </div>
+      <div class="col-sm-3">
+        <p class="font-weight-bold">Teaching</p>
+        <p>Percentage of students happy with their teachers:</p>
+        <p class="mb-1">{{university.teaching}}%</p>
+      </div>
+    </div>
+  </div><br>
+
+  <div class="container-fluid bg-3 text-center">
+    <div class="row justify-content-center lead">
+      <div class="col-sm-3">
+        <p class="font-weight-bold">Feedback</p>
+        <p>Percentage of students satisfied with the feedback they have recieved:</p>
+        <p class="mb-1">{{university.feedback}}%</p>
+      </div>
+      <div class="col-sm-3">
+        <p class="font-weight-bold">Ratio</p>
+        <p>Number of students to teachers:</p>
+        <p class="mb-1">{{university.ratio}}</p>
+      </div>
+      <div class="col-sm-3">
+        <p class="font-weight-bold">Spend</p>
+        <p>Expenditure per student as a score out of 10:</p>
+        <p class="mb-1">{{university.spend}}</p>
+      </div>
+    </div>
+  </div>
+
+  <div class="container-fluid bg-3 text-center">
+    <div class="row justify-content-center lead">
+      <div class="col-sm-3">
+        <p class="font-weight-bold">Tariff</p>
+        <p>Average UCAS tariff needed for students to enter the institution:</p>
+        <p class="mb-1">{{university.tariff}}</p>
+      </div>
+      <div class="col-sm-3">
+        <p class="font-weight-bold">Career</p>
+        <p>Percentage of students who get a job within 15 months of graduation:</p>
+        <p class="mb-1">{{university.career}}%</p>
+      </div>
+      <div class="col-sm-3">
+        <p class="font-weight-bold">Continuation</p>
+        <p>Percentage of first year students passing and proceeding to 2nd year:</p>
+        <p class="mb-1">{{university.continuation}}%</p>
+      </div>
+    </div>
+  </div>
+
+  <br />
+  <hr /><br />
+  <div class="container border border-top p-2 border-dark">
+    <div class="row">
+      <div class="panel panel-default widget">
+        <div class="panel-heading">
+          <span class="glyphicon glyphicon-comment"></span>
+          <h3 class="panel-title">
+            ({{ university.comments.length }}) Comments</h3>
+          <div class="col-md-4">
+            <div class="dropdown sort-button">
+              <hr />
+              <button class="btn btn-secondary dropdown-toggle m-1" type="button" id="dropdownMenuButton"
+                data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                Sort
+              </button>
+              <div class="dropdown-menu" aria-labelledby="Sort">
+                <a class="dropdown-item" (click)="sortAsc()">Ascending Rank</a>
+                <a class="dropdown-item" (click)="sortDesc()">Descending Rank</a>
+              </div>
+            </div>
+          </div>
+        </div>
+        <div class="panel-body">
+          <ul class="list-group" *ngFor="let comment of comments">
+            <li class="list-group-item">
+              <div class="row">
+                <div class="col-xs-2 col-md-1">
+                  <img src="http://placehold.it/80" class="img-circle img-responsive" alt="" /></div>
+                <div class="col-xs-10 col-md-11">
+                  <div>
+                    {{comment.username}}
+                    <div class="mic-info">
+                      Posted on: {{comment.sentDateTime }}
+                    </div>
+                    <div class="mic-info">
+                      Edited: {{comment.isEdited }}
+                    </div>
+                  </div>
+                  <div class="comment-text">
+                    {{comment.text}}
+                  </div>
+                  <div class="action">
+                    <button type="button" class="btn btn-primary btn-xs m-3" title="Edit">
+                      <span class="glyphicon glyphicon-pencil"> {{ comment.likeReactions.length }}
+                        <mat-icon class="w-100 h-100" (click)="toggleReaction(comment._id, 'likeReaction')">
+                          thumb_up_alt</mat-icon></span>
+                    </button>
+                    <button type="button" class="btn btn-success btn-xs m-3" title="Approved">
+                      <span class="glyphicon glyphicon-ok"> {{ comment.laughReactions.length }}<mat-icon
+                          class="w-100 h-100" (click)="toggleReaction(comment._id, 'laughReaction')">
+                          sentiment_very_satisfied</mat-icon></span>
+                    </button>
+                    <button type="button" class="btn btn-danger btn-xs m-3" title="Delete">
+                      <span class="glyphicon glyphicon-trash"> {{ comment.angryReactions.length }}<mat-icon
+                          class="w-100 h-100" (click)="toggleReaction(comment._id, 'angryReaction')">mood_bad
+                        </mat-icon></span>
+                    </button>
+                    <div class="w-50" *ngIf="comment.username === currentUser.user">
+                      <button type="button" class="btn btn-danger ml-1 p-2 w-25"
+                        (click)="deleteComment(comment._id)">Delete</button>
+                      <a type="button" class="btn btn-primary ml-1  p-2 w-25" style="cursor: pointer"
+                        [routerLink]="['/comments', comment._id]">Edit</a>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </li>
+          </ul>
+        </div>
+      </div>
+    </div>
+  </div>
+  <ul>
+    <div
+      *ngFor="let comment of comments | paginate: { itemsPerPage: 5, currentPage:page_num, totalItems: commentTotal}">
+    </div>
+  </ul>
+  <div class="universities-pag">
+    <pagination-controls (pageChange)="getPage($event)"></pagination-controls>
+  </div>
+
+  <br />
+  <ng-container *ngIf="currentUser;
+else loggedOut">
+    <div class="container">
+      <div class="row">
+        <h2>Please comment on this university</h2>
+        <form [formGroup]=" commentForm" (ngSubmit)="onSubmit()">
+          <div class="form-group">
+            <label for="comment">Please leave your comment below:
+            </label>
+            <textarea id="comment" rows="3" name="comment" class="form-control" formControlName="comment"
+              [ngClass]="{'error': isInvalid('comment')}"></textarea>
+          </div>
+          <span *ngIf="isIncomplete()">
+            You must complete all fields</span>
+          <button *ngIf="!isIncomplete()" type="submit" class="btn btn-primary">Submit</button>
+        </form>
+      </div>
+    </div>
+  </ng-container>
+</div>
+
+<br />
+<ng-template #loggedOut>
+  <div class="col-md-6 mx-auto p-1">
+    <a href="signup" class=" alert alert-danger">Please login or create an account to post a comment.</a>
+  </div>
+</ng-template>

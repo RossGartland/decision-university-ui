@@ -1,0 +1,57 @@
+<div class="container py-5">
+  <div class=" row">
+    <div class="col-md-4">
+      <div class="dropdown sort-button">
+        <button class="btn btn-secondary dropdown-toggle" type="button" id="dropdownMenuButton" data-toggle="dropdown"
+          aria-haspopup="true" aria-expanded="false">
+          Sort
+        </button>
+        <div class="dropdown-menu" aria-labelledby="Sort">
+          <a class="dropdown-item" (click)="sortAsc()">Ascending Rank</a>
+          <a class="dropdown-item" (click)="sortDesc()">Descending Rank</a>
+        </div>
+      </div>
+    </div>
+    <div class="col-md-8">
+      <div class="input-group search">
+        <input type="search" class="form-control rounded" placeholder="Search for a university" aria-label="Search"
+          aria-describedby="search-addon" [(ngModel)]="search_institution" />
+        <button type="button" class="btn btn-danger" (click)="onSearch(search_institution)">Search</button>
+      </div>
+    </div>
+  </div>
+  <div class="row">
+    <div class="col-lg-8 mx-auto">
+      <div *ngFor="let university of university_list">
+        <ul class="list-group shadow">
+          <li class="list-group-item">
+            <div class="media align-items-lg-center flex-column flex-lg-row p-3">
+              <div class="media-body order-2 order-lg-1">
+                <h5 class="mt-0 font-weight-bold mb-2">{{ university.institution }}</h5>
+                <div class="d-flex align-items-center justify-content-between mt-1">
+                  <h6 class="font-weight-bold my-2">University League Table Rank: {{ university.r2022 }} </h6>
+                  <h6 class="font-weight-bold my-2">Total Score: {{ university.score }} </h6>
+                  <h6 class="font-weight-bold my-2">Avg tariff: {{ university.tariff }} </h6>
+                  <h6 class="font-weight-bold my-2">Comments: {{ university.comments.length }} </h6>
+                </div>
+                <a class="mt-md-3 mb-4 scroll align-self-center text-dark" style="cursor: pointer"
+                  [routerLink]="['/universities', university._id]">
+                  More information
+                </a>
+              </div>
+            </div>
+          </li>
+        </ul>
+      </div>
+    </div>
+  </div>
+
+  <ul>
+    <div
+      *ngFor="let university of university_list | paginate: { itemsPerPage: 10, currentPage:page_num, totalItems: universityService.university_count}">
+    </div>
+  </ul>
+  <div class="universities-pag">
+    <pagination-controls (pageChange)="getPage($event)"></pagination-controls>
+  </div>
+</div>

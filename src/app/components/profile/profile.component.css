@@ -1,0 +1,36 @@
+
+.bookmark-container {
+    max-width: 500px;
+}
+.react-row {
+    display: ruby;
+}
+.comments-container {
+    float: left;
+}
+.comment{
+    border: 1px solid black;
+    float: left;
+    border-radius: 5px;
+    padding-left: 40px;
+    padding-right: 30px;
+    padding-top: 10px;
+    
+}
+
+.comment{
+    border: 1px solid black;
+    float: left;
+    border-radius: 5px;
+    padding-left: 40px;
+    padding-right: 30px;
+    padding-top: 10px;
+    
+}
+@media only screen and (max-width: 600px) {
+    .bookmark-container {
+        max-width: 500px;
+        float: none;
+        left: 0;
+    }
+  }

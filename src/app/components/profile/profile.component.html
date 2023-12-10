@@ -1,0 +1,147 @@
+<div class="container" *ngIf="currentUser; else loggedOut">
+  <div class="user-details" *ngFor="let user of userDetails | async">
+    <div class="row">
+      <div class="col-xs-6">
+        <div class="card mb-4">
+          <div class="card-body text-center">
+            <img
+              src="https://www.nicepng.com/png/detail/799-7998295_profile-placeholder-woman-720-profile-photo-placeholder-png.png"
+              alt="avatar" class="rounded-circle img-fluid" style="width: 150px;">
+            <h5 class="my-3">{{ user.username }}</h5>
+            <p class="text-muted mb-1">Admin: {{user.isAdmin}}</p>
+            <br />
+            <div class="d-flex justify-content-center mb-2">
+              <button type="button" class="btn btn-danger">Delete</button>
+            </div>
+          </div>
+        </div>
+        <div class="col-xs-6">
+          <div class="card mb-4">
+            <div class="card-body">
+              <div class="row">
+                <div class="col-sm-3">
+                  <p class="mb-0">Forename</p>
+                </div>
+                <div class="col-sm-9">
+                  <p class="text-muted mb-0">{{user.forename}}</p>
+                </div>
+              </div>
+              <hr>
+              <div class="row">
+                <div class="col-sm-3">
+                  <p class="mb-0">Surname</p>
+                </div>
+                <div class="col-sm-9">
+                  <p class="text-muted mb-0">{{user.surname}}</p>
+                </div>
+              </div>
+              <hr>
+              <div class="row">
+                <div class="col-sm-3">
+                  <p class="mb-0">Email</p>
+                </div>
+                <div class="col-sm-9">
+                  <p class="text-muted mb-0">{{user.email}}</p>
+                </div>
+              </div>
+              <hr>
+              <div class="row">
+                <div class="col-sm-3">
+                  <p class="mb-0">Joined</p>
+                </div>
+                <div class="col-sm-9">
+                  <p class="text-muted mb-0">{{user.crtdTimestamp}}</p>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+  <div class="container mx-auto bookmark-container" *ngIf="bookmark_list; else noBookmarks">
+    <h1>My Bookmarks</h1>
+    <table class="table">
+      <thead>
+        <tr>
+          <th scope="col">University</th>
+          <th scope="col"></th>
+        </tr>
+      </thead>
+      <tbody *ngFor="let bookmark of bookmark_list | async">
+        <tr>
+          <td>{{bookmark.institutionName}}</td>
+          <td><button type="button" class="btn btn-danger"
+              (click)="deleteBookmark(bookmark.institutionID)">Delete</button></td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+</div>
+
+<ng-template #noBookmarks>
+  You do not have any bookmarks.
+</ng-template>
+
+<div class="container border border-top p-2 border-dark">
+  <div class="row">
+    <div class="panel panel-default widget">
+      <div class="panel-heading">
+        <span class="glyphicon glyphicon-comment"></span>
+        <h3 class="panel-title">
+          My Comments</h3>
+      </div>
+      <div class="panel-body">
+        <ul class="list-group" *ngFor="let comment of comments | async">
+          <li class="list-group-item">
+            <div class="row">
+              <div class="col-xs-2 col-md-1">
+                <img src="http://placehold.it/80" class="img-circle img-responsive" alt="" /></div>
+              <div class="col-xs-10 col-md-11">
+                <div>
+                  {{comment.username}}
+                  <div class="mic-info">
+                    Posted on: {{comment.sentDateTime }}
+                  </div>
+                  <div class="mic-info">
+                    Edited: {{comment.isEdited }}
+                  </div>
+                </div>
+                <div class="comment-text">
+                  {{comment.text}}
+                </div>
+                <div class="action">
+                  <button type="button" class="btn btn-primary btn-xs m-3" title="Edit">
+                    <span class="glyphicon glyphicon-pencil"> {{ comment.likeReactions.length }}
+                      <mat-icon class="w-100 h-100">
+                        thumb_up_alt</mat-icon></span>
+                  </button>
+                  <button type="button" class="btn btn-success btn-xs m-3" title="Approved">
+                    <span class="glyphicon glyphicon-ok"> {{ comment.laughReactions.length }}<mat-icon
+                        class="w-100 h-100">
+                        sentiment_very_satisfied</mat-icon></span>
+                  </button>
+                  <button type="button" class="btn btn-danger btn-xs m-3" title="Delete">
+                    <span class="glyphicon glyphicon-trash"> {{ comment.angryReactions.length }}<mat-icon
+                        class="w-100 h-100">mood_bad
+                      </mat-icon></span>
+                  </button>
+                  <div class="w-50" *ngIf="comment.username === currentUser.user">
+                    <button type="button" class="btn btn-danger ml-1 p-2 w-25"
+                      (click)="deleteComment(comment._id)">Delete</button>
+                    <a type="button" class="btn btn-primary ml-1  p-2 w-25" style="cursor: pointer"
+                      [routerLink]="['/comments', comment._id]">Edit</a>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </li>
+        </ul>
+      </div>
+    </div>
+  </div>
+</div>
+<hr />
+<ng-template #loggedOut>
+  Please login.
+</ng-template>

@@ -1,0 +1,9 @@
+.navbar {
+    font-weight: bold;
+    text-align: center;
+    background: rgba(0,0,0,0.5);
+  }
+  .nav-item {
+    color: black;
+    padding-left: 10px;
+  }

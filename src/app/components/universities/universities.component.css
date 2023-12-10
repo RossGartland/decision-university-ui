@@ -1,0 +1,30 @@
+body {
+    background: linear-gradient(to right, #c04848, #480048);
+    min-height: 100vh
+}
+.text-gray{
+    color: #aaa
+}
+img
+{
+    height: 170px;
+    width: 140px
+}
+.universities-pag {
+    left: 50%;
+    position: relative;
+}
+.sort-button{
+    left: 52%;
+    padding: 5px;
+}
+@media only screen and (max-width: 600px) {
+    .universities-pag {
+        left: 0;
+        position: relative;
+    }
+    .sort-button{
+        left: 0%;
+        padding: 5px;
+    }
+  }

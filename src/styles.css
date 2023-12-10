@@ -1,0 +1,11 @@
+/* @import "~bootstrap/dist/css/bootstrap.css"; */
+
+html {
+    max-width: 100%;
+    overflow-x: hidden;
+}
+.search {
+    width: 40vh;
+    justify-content: center;
+    display: inline-flex;
+}

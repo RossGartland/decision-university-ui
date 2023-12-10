@@ -1,0 +1,79 @@
+.myjumbotron {
+    background-image: url("https://loremflickr.com/1920/1080/university");
+    box-shadow: 0px 4px 4px 0px #00000040,inset 0 0 0 1000px rgba(0,0,0,.5);
+  background-size:cover;
+  background-position:center;
+  background-repeat:no-repeat;
+  color: white;
+  -webkit-text-stroke-width: 0.1px;
+  -webkit-text-stroke-color: black;
+}
+
+.react-row {
+    display: ruby;
+}
+.submit-comment-container {
+    display: inline-block;
+    vertical-align: middle;
+    right: 25%;
+}
+.error { 
+    background-color: #fff0f0;
+ }
+
+.widget .panel-body { 
+    padding:0px;
+ }
+.widget .list-group { 
+    margin-bottom: 0;
+ }
+.widget .panel-title { 
+    display:inline
+ }
+.widget .label-info { 
+    float: right;
+ }
+.widget li.list-group-item {
+    border-radius: 0;
+    border: 0;
+    border-top: 1px solid #ddd;
+}
+.widget li.list-group-item:hover { 
+    background-color: rgba(86,61,124,.1);
+ }
+.widget .mic-info { 
+    color: #666666;
+}
+.widget .action { 
+    margin-top:5px;
+ }
+
+.widget .btn-block { 
+    border-top-left-radius:0px;
+    border-top-right-radius:0px; 
+}
+.universities-pag {
+    left: 70%;
+    position: relative;
+}
+
+
+@media only screen and (max-width: 600px) {
+    .comments-container {
+        left: 0;
+        position: relative;
+    }
+    .universities-pag {
+        left: 0;
+        position: relative;
+    }
+  }
+
+@media only screen and (max-width: 1400px) {
+    .react-row {
+        display: inline;
+    }
+    .submit-comment-container {
+        right: 0%;
+    }
+  }

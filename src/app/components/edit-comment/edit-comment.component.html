@@ -1,0 +1,23 @@
+<ng-container *ngIf="currentUser;
+else loggedOut">
+  <section class="container-fluid bg-3 text-center card card-container col-md-6 mx-auto submit-comment-container">
+    <h2>Edit Comment</h2>
+    <form [formGroup]=" commentForm" (ngSubmit)="onSubmit()">
+      <div class="form-group">
+        <label for="comment">Please edit the comment below:
+        </label>
+        <textarea id="comment" rows="3" name="comment" class="form-control" formControlName="comment"
+          [ngClass]="{'error': isInvalid('comment')}"></textarea>
+      </div>
+      <span *ngIf="isIncomplete()">
+        You must complete all fields</span>
+      <button *ngIf="!isIncomplete()" type="submit" class="btn btn-primary">Submit</button>
+    </form>
+  </section>
+</ng-container>
+<br />
+<ng-template #loggedOut>
+  <div class="card-container col-md-6 mx-auto float-left">
+    <a href="signup">Please login or create an account to post a comment.</a>
+  </div>
+</ng-template>

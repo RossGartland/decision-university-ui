@@ -1,0 +1,46 @@
+<div class="container" *ngIf="currentUser.isAdmin; else notAdmin">
+  <div class="p-3">
+    <div class="col-md-8">
+      <a href="/add-university" type="button" class="btn btn-success m-1">Add</a>
+      <div class="input-group search">
+        <input type="search" class="form-control rounded" placeholder="Search for a university" aria-label="Search"
+          aria-describedby="search-addon" [(ngModel)]="search_institution" />
+        <button type="button" class="btn btn-danger" (click)="onSearch(search_institution)">Search</button>
+      </div>
+    </div>
+    <br />
+    <table class="table">
+      <thead class="thead-dark">
+        <tr>
+          <th scope="col">University</th>
+          <th scope="col">Added on</th>
+          <th scope="col">Updated on</th>
+          <th scope="col">Edit</th>
+          <th scope="col">Delete</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr *ngFor="let university of university_list">
+          <td>{{university.institution}}</td>
+          <td>{{university.crtdTimestamp}}</td>
+          <td>{{university.updtTimestamp}}</td>
+          <td><a class="btn btn-primary" type="button" style="cursor: pointer"
+              [routerLink]="['/edit-university/', university._id]">Edit</a></td>
+          <td><button type="button" class="btn btn-danger" (click)="deleteUniversity(university._id)">Delete</button>
+          </td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+  <ul>
+    <div
+      *ngFor="let university of university_list | paginate: { itemsPerPage: 10, currentPage:page_num, totalItems: universityService.university_count}">
+    </div>
+  </ul>
+  <div class="universities-pag">
+    <pagination-controls (pageChange)="getPage($event)"></pagination-controls>
+  </div>
+</div>
+<ng-template #notAdmin>
+  You must be an admin to access this page.
+</ng-template>
