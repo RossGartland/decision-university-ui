@@ -1,3 +1,7 @@
+#Decision University - Angular UI (Python Flask API Integration)
+
+The Decision University User Interface is a responsive front-end application built with Angular. It connects to a backend powered by a Python Flask API to allow prospective students to browse and compare universities based on rankings and other relevant metrics. This project complements the Flask-based API for the Decision University platform.
+
 # Com661Ui
 
 This project was generated with [Angular CLI](https://github.com/angular/angular-cli) version 15.0.0.
